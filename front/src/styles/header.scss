@@ -1,0 +1,30 @@
+@import 'colors';
+
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    border-bottom: 1px solid $gray-border;
+    background: #FFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    .logo {
+        width: 190px;
+        height: 20px;
+        color: $primary;
+    }
+}
+.header__logo {
+    margin: auto;
+}
+
+.header__user {
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    right: 10%;
+}
