@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Header from './Header';
-import HotelCard from './HotelCard/HotelCard';
+import HotelCard from './HotelCard/hotelCard';
 
 const App = () => {
 
@@ -22,9 +22,7 @@ const App = () => {
     <div className='app__body'>
       <div style={styles.container}>
         {hotels && hotels.map((hotel, index) => (
-          <div key={index} style={styles.item}>
-            <HotelCard {...hotel}></HotelCard>
-          </div>
+            <HotelCard {...hotel} key={index}></HotelCard>
         ))}
       </div>
     </div>
@@ -39,10 +37,7 @@ const styles = {
     flexWrap: 'wrap',
     alignItems: 'flex-start', // fill rows left to right
     padding: '2% 9%'
-  },
-  item: {
-    width: '50%'
   }
-}
+};
 
-export default App
+export default App;

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import fetch from 'isomorphic-fetch'
+import React, { useEffect, useState } from 'react';
+import fetch from 'isomorphic-fetch';
 
-import 'styles/header.scss'
+import 'styles/header.scss';
 
-import StaycationLogo from './StaycationLogo'
+import StaycationLogo from './StaycationLogo';
 
 const Header = () => {
-  const [user, setUser] = useState(undefined)
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     fetch('http://localhost:9000/users/1')
@@ -28,7 +28,7 @@ const Header = () => {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

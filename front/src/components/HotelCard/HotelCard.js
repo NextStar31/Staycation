@@ -1,101 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+
+import Description from '../Description/description';
+import Image from '../Image/image';
 
 const HotelCard = (
   {
-    id,
     name,
     stars,
     preview,
-    pictureId
+    pictureId,
+    reviewScore,
+    reviewCount,
+    startPrice,
+    discountPrice
   }) => {
-
-
-  const [review, setReview] = useState({
-    score: 0,
-    count: 0
-  });
-  const [price, setPrice] = useState({
-    discountPrice: 0,
-    startPrice: 0
-  });
-
-  useEffect(() => {
-    fetch(`http://localhost:9000/reviews/${id}`)
-      .then(async res => {
-        const result = await res.json()
-        setReview({
-          score: result.round,
-          count: result.count
-        })
-      })
-      .catch(e => console.warn('Error: ', e))
-  }, id)
-
-  useEffect(() => {
-    fetch(`http://localhost:9000/prices/${id}`)
-      .then(async res => {
-        const result = await res.json()
-        setPrice({
-          discountPrice: result.discountPrice,
-          startPrice: result.price
-        })
-      })
-      .catch(e => console.warn('Error: ', e))
-  }, id)
-
-  function getStarNumberToString(stars) {
-    let result = "";
-    for (let index = 0; index < stars; index++) {
-      result += "*";
-    }
-    return result;
-  }
-
   return (
     <div id="hotel-card" style={styles.container}>
-      <div style={styles.imgContainer}>
-        <img style={styles.img}
-          src={pictureId}
-          alt="Hotel"></img></div>
-      <div style={styles.descriptionContainer}>
-        <div style={styles.titleContainer}>
-          <div style={styles.hotelName}>{name}</div>
-          <span>{getStarNumberToString(stars)}</span>
-          <div>{review.score} ({review.count})</div>
-        </div>
-        <span>{preview}</span>
-        <div>{price.discountPrice} {price.startPrice}</div>
+      <div style={styles.box}>
+        <Image pictureId={pictureId}></Image>
+        <Description
+          name={name}
+          stars={stars}
+          preview={preview}
+          startPrice={startPrice}
+          discountPrice={discountPrice}
+          reviewScore={reviewScore}
+          reviewCount={reviewCount}>
+        </Description>
       </div>
     </div>
   )
 }
 
-
 const styles = {
   container: {
+    width: '50%'
+  },
+  box: {
     padding: '12px'
-  },
-  imgContainer: {
-    height: '300px'
-  },
-  img: {
-    width: '100%',
-    objectFit: 'cover',
-    height: '100%',
-    borderRadius: '8px'
-  },
-  descriptionContainer: {
-    marginBottom: '24px',
-    fontSize: 'large',
-    marginTop: '12px'
-  },
-  titleContainer: {
-    display: 'flex',
-    fontWeight: 'bold'
-  },
-  hotelName: {
-    marginRight: '8px'
   }
-}
+};
 
-export default HotelCard
+export default HotelCard;

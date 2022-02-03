@@ -1,0 +1,36 @@
+@import "../../styles/colors.scss";
+
+.pricing-container {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+}
+
+.discountPrice {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.startPrice {
+    color: $text-light;
+    margin-right: 8px;
+    position: relative;
+    white-space: nowrap; /* would center line-through in the middle of the wrapped lines */
+}
+
+.discountPercent {
+    padding: 4px 8px;
+    background: $primary;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.startPrice:after {
+    border-top: 1px solid $text-light;
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 60%;
+    left: 0;
+}
