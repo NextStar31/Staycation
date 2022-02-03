@@ -24,7 +24,7 @@ const Header = () => {
       </div>
       {user && (
         <div className='header__user'>
-          Welcome, {user.firstName}!
+          Welcome, {user.firstName}
         </div>
       )}
     </div>

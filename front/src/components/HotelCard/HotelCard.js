@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 
 const HotelCard = (
   {
@@ -8,6 +8,40 @@ const HotelCard = (
     preview,
     pictureId
   }) => {
+
+
+  const [review, setReview] = useState({
+    score: 0,
+    count: 0
+  });
+  const [price, setPrice] = useState({
+    discountPrice: 0,
+    startPrice: 0
+  });
+
+  useEffect(() => {
+    fetch(`http://localhost:9000/reviews/${id}`)
+      .then(async res => {
+        const result = await res.json()
+        setReview({
+          score: result.round,
+          count: result.count
+        })
+      })
+      .catch(e => console.warn('Error: ', e))
+  }, id)
+
+  useEffect(() => {
+    fetch(`http://localhost:9000/prices/${id}`)
+      .then(async res => {
+        const result = await res.json()
+        setPrice({
+          discountPrice: result.discountPrice,
+          startPrice: result.price
+        })
+      })
+      .catch(e => console.warn('Error: ', e))
+  }, id)
 
   function getStarNumberToString(stars) {
     let result = "";
@@ -27,8 +61,10 @@ const HotelCard = (
         <div style={styles.titleContainer}>
           <div style={styles.hotelName}>{name}</div>
           <span>{getStarNumberToString(stars)}</span>
+          <div>{review.score} ({review.count})</div>
         </div>
         <span>{preview}</span>
+        <div>{price.discountPrice} {price.startPrice}</div>
       </div>
     </div>
   )
